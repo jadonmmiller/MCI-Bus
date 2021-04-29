@@ -21,7 +21,7 @@ step::step(cylinder* stepCylinder, cylinder* lockCylinder, int stepDelay, int lo
     LockCylinder = lockCylinder;
     StepDelay = stepDelay;
     LockDelay = lockDelay;
-    Extended = true;
+    Extended = false;
 }
 
 // Init: Starts cylinder classes.

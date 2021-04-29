@@ -1,2 +1,2 @@
 # MCI Bus
- The code, documentation, and other articles for our private-conversion 1992 MCI motorhome.
+ This contains the code, documentation, and other articles we used in our private-conversion 1992 MCI motorhome.
