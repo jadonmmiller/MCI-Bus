@@ -82,70 +82,52 @@ void stepLogic()
 
             if (DoorSwitch.tripped()) {
                 StepOutput.extend(true);
-
-                //delay for debouncing
-                vTaskDelay(DOORSWITCHDEBOUNCEDELAY / portTICK_PERIOD_MS);
             } else {
                 StepOutput.retract(true);
-
-                //delay for debouncing
-                vTaskDelay(DOORSWITCHDEBOUNCEDELAY / portTICK_PERIOD_MS);
             }
             break;
 
             //in extend auto mode, we extend the step and return to auto mode when the door is closed
         case modeExtendAuto:
-        //reset flags from other modes
-        DoorRetractFlag = false;
+            //reset flags from other modes
+            DoorRetractFlag = false;
 
-        //this retracts the step when the parking brake goes off
-        if (PBrakeSwitch.tripped()) {
-            StepOutput.extend(true);
+            //this retracts the step when the parking brake goes off
+            if (PBrakeSwitch.tripped()) {
+                StepOutput.extend(true);
             } else {
                 StepOutput.retract(true);
             }
 
-            //if the door is opened, we wait a bit to debounce, then set the flag
+            //if the door is opened, we set the flag
             if (DoorSwitch.tripped()) {
-                vTaskDelay(DOORSWITCHDEBOUNCEDELAY / portTICK_PERIOD_MS);
-                if (DoorSwitch.tripped()) {
-                    DoorExtendFlag = true;
-                }
+                DoorExtendFlag = true;
 
-                //if the door is shut, we wait a bit to debounce, then reset to the auto mode
+                //if the door is shut, we reset to the auto mode
             } else {
                 if (DoorExtendFlag) {
-                    vTaskDelay(DOORSWITCHDEBOUNCEDELAY / portTICK_PERIOD_MS);
-                    if (!DoorSwitch.tripped()) {
-                        ProgramMode = modeAuto;
-                        DoorExtendFlag = false;
-                    }
+                    ProgramMode = modeAuto;
+                    DoorExtendFlag = false;
                 }
             }
             break;
 
             //in retract auto mode, we retract the step and return to auto mode when the door is opened
         case modeRetractAuto:
-        // reset door flags from other modes
-        DoorExtendFlag = false;
+            // reset door flags from other modes
+            DoorExtendFlag = false;
 
-        StepOutput.retract(true);
+            StepOutput.retract(true);
 
-        //if the door is shut, we wait a bit to debounce, then set the flag
-        if (!DoorSwitch.tripped()) {
-            vTaskDelay(DOORSWITCHDEBOUNCEDELAY / portTICK_PERIOD_MS);
+            //if the door is shut, we set the flag
             if (!DoorSwitch.tripped()) {
                 DoorRetractFlag = true;
-            }
 
-            //if the door is opened, we wait a bit to debounce, then reset to the auto mode
+                //if the door is opened, we wait a bit to debounce, then reset to the auto mode
             } else {
                 if (DoorRetractFlag) {
-                    vTaskDelay(DOORSWITCHDEBOUNCEDELAY / portTICK_PERIOD_MS);
-                    if (DoorSwitch.tripped()) {
-                        ProgramMode = modeAuto;
-                        DoorRetractFlag = false;
-                    }
+                    ProgramMode = modeAuto;
+                    DoorRetractFlag = false;
                 }
             }
             break;
