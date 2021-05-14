@@ -33,13 +33,13 @@ upDownSwitch InternalSwitch(PININUPINPUT, PININDOWNINPUT, &ProgramMode, SWITCHUP
     SWITCHDOWNACTION, SWITCHHOLDUPACTION, SWITCHHOLDDOWNACTION, SWITCHDEBOUNCEDELAY, SWITCHHOLDDELAY);
 
 //pressure switch returns true if pressure is present
-input PressSwitch(PINPRESSINPUT, false, false);
+input PressSwitch(PINPRESSINPUT, false, false, INPUTDEBOUNCEDELAY);
 
 //parking brake returns true if brake on
-input PBrakeSwitch(PINPBRAKEINPUT, true, false);
+input PBrakeSwitch(PINPBRAKEINPUT, true, false, INPUTDEBOUNCEDELAY);
 
 //door switch returns true if opened
-input DoorSwitch(PINDOORINPUT, true, false);
+input DoorSwitch(PINDOORINPUT, true, false, INPUTDEBOUNCEDELAY);
 
 cylinder StepCylinder(PINSTEPOUTPUT, false);
 cylinder LockCylinder(PINLOCKOUTPUT, false);

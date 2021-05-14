@@ -29,6 +29,9 @@
 #define SWITCHHOLDDELAY 1000
 #define DOORSWITCHDEBOUNCEDELAY 500
 
+// Input Timing: Set the debounce on the parking brake, pressure, and door switches.
+#define INPUTDEBOUNCEDELAY 200
+
 // Step Timing: These delays control the step operation
 #define STEPMOVEDELAY 2000
 #define LOCKMOVEDELAY 500

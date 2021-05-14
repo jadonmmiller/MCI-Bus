@@ -15,11 +15,12 @@
 #ifndef INPUT_H
 #define INPUT_H
 
+#include <Arduino_FreeRTOS.h>
 #include <Arduino.h>
 
 class input {
 public:
-    input(int, bool, bool);
+    input(int, bool, bool, int);
     void init();
     bool tripped();
 
@@ -27,6 +28,7 @@ private:
     int Pin;
     bool Invert;
     bool PullUp;
+    int DebounceDelay;
 };
 
 #endif
