@@ -61,7 +61,6 @@ void serialTask(void* pvParameters)
         printStatuses();
         Serial.println();
         Serial.println();
-        Serial.println(DoorSwitch.tripped());
         vTaskDelay(250 / portTICK_PERIOD_MS);
     }
 }
