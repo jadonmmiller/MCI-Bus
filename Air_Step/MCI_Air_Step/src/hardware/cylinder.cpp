@@ -25,6 +25,7 @@ cylinder::cylinder(int pin, bool invert)
 // Init: Configures IO.
 void cylinder::init()
 {
+    pinMode(Pin, INPUT_PULLUP);
     pinMode(Pin, OUTPUT);
     if (Invert) {
         digitalWrite(Pin, HIGH); //set pin automatically on if inverted
